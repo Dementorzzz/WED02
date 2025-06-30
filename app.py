@@ -1252,7 +1252,7 @@ def all_boms():
                             if 'NUMBER_REQUIRED' in bom_nobump_df.columns and not bom_nobump_df['NUMBER_REQUIRED'].dropna().empty
                             else 0
                         )
-                        UNIT = (no_bump_val + number_required_val) / 2 if (no_bump_val or number_required_val) else 1
+                        UNIT = adjusted_val = (no_bump_val / 2) + number_required_val if (no_bump_val or number_required_val) else 1
                     else:
                         UNIT = 1
 
@@ -1466,7 +1466,7 @@ def export_all_boms_excel():
                 except:
                     no_bump_val, number_required_val = 0, 0
 
-                UNIT = (no_bump_val + number_required_val) / 2 if (no_bump_val or number_required_val) else 1
+                UNIT = adjusted_val = (no_bump_val / 2) + number_required_val if (no_bump_val or number_required_val) else 1
 
                 for _, row in summary.iterrows():
                     model = row['Normalized Model']
